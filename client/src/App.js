@@ -1,4 +1,4 @@
-import './App.css';
+import './app.css';
 
 import React, { useState, useEffect } from 'react';
 
@@ -25,12 +25,11 @@ const [adiError, setAdiError] = useState('');
   const hsi= Number(HSI);
   const adi= Number(ADI);
 
-  let isValid = true;
-  if(alt < 0 || alt> 3000) {isValid = false;}
-  if(hsi<0||hsi > 360) {isValid = false;}
-  if (adi < -100 || adi >100) {
-    isValid = false;
-  }
+  const isValid = 
+  alt >= 0 && alt <= 3000 &&
+  hsi >= 0 && hsi <= 360 &&
+  adi >= -100 && adi <= 100;
+
 //אם כל הערכים תקינים
   if (!isValid) { return;}
     const newParameter = {
@@ -38,7 +37,9 @@ const [adiError, setAdiError] = useState('');
       HSI: Number(HSI),
       ADI: Number(ADI)
     };
-  
+    
+    const API_URL = process.env.REACT_APP_API_URL;
+
     //לשלוח את הנתונים לשרת בעזרת בקשת POST ולעדכן את הנתונים שמוצגים 
     fetch('http://localhost:5000/api/parameters', {
       method: 'POST',
@@ -74,9 +75,9 @@ const [adiError, setAdiError] = useState('');
   return (
     <div className="App">
       <div className="top-buttons">
-        <button className={viewMode=== 'text' ? 'tab active' : 'tab'}//כפתור טקסט
+        <button className={viewMode === 'text' ? 'tab active' : 'tab'}//כפתור טקסט
         onClick={() =>setViewMode('text')}>TEXT</button> 
-        <button className={viewMode==='visual' ? 'tab active' : 'tab'}//כפתור להצגה ויזואלית
+        <button className={viewMode ==='visual' ? 'tab active' : 'tab'}//כפתור להצגה ויזואלית
         onClick={()=>setViewMode('visual')}>VISUAL</button>
         {!showForm && (// הפלוס לא יופיע אם הטופס פתוח
           <button onClick={() => setShowForm(prev => !prev)/*מחליף בין true וfalse כל פעם לוחצים וזה מתהפך */}>+</button>
