@@ -1,0 +1,315 @@
+body {
+  background-color: #f4f4f4; 
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.visual-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 110px;
+}
+
+.HSI-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+  /* מיכל של HSI-משמש כתבנית לאלמנטים האחרים של המחוגה */
+.degree-container {
+  width: 300px;             /* same width & height */
+  height: 300px;
+  border-radius: 50%; /*circle */
+  border: 6px solid rgb(5, 51, 66);  ;
+  overflow: hidden;         /* crop anything outside the circle */
+  position: relative;/* את החץ מאפשר למקם אלמנטים פנימיים בצורה אבסלוטית ביחס למיכל הזה ככה נמקם*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(5, 51, 66);  
+}
+
+/* המחוגה (HSI) מסתובבת סביב מרכז המעגל*/
+.degree {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;         /* makes the image stretch to fit */
+  transform-origin: 50% 50%;  /*מסתובב סביב המרכז*/
+  transition: transform 0.5s ease-in-out;
+}
+
+/* חץ אדום על המחוגה לא זז ומצביע על הזווית */
+.arrow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 82%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* מביא את בסיס החץ למרכז העיגול */
+  pointer-events: none;
+}
+
+.altitude-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* מסגרת חיצונית למד גובה מאפשר למקם בתוכה אלמנטים במיקום יחסי כמו החץ והתוויות לפי הגובה*/
+.scale-container {
+  position: relative;
+  padding-top: 50%;
+  width: 80px;
+  height: 300px;
+}
+
+.scale {
+  position: relative;
+  width: 85px;
+  height: 100%;
+  background-color: white;
+  border: 4px solid rgb(5, 51, 66);
+  margin-left: 40px;
+  padding-top: 20px; 
+  box-sizing: border-box;
+}
+
+
+.labels {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 12px;
+  display: block;
+}
+
+/*המספרים על מד הובה מיקום*/
+.labels div {
+  position: absolute;
+  left: 12px;
+  transform: translateY(-50%);/* ם מאזן את המיקום כך שהמספר יוצג באמצע הגובה של הקו שאליו שייך*/
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/*החץ של מד הגובה*/
+.altitude-arrow {
+  position: absolute;
+  left: -25px;
+  display: flex;
+  align-items: center;
+  font-size: 23px;
+  color: black;
+
+  transform: translateY(50%); /* זה מה שמאזן את החץ לגובהו */
+}
+
+/* מד גובה הקו האדום על */
+.altitude-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  transform: translateY(70%);
+  pointer-events: none;
+}
+
+
+/*מיכל שבתוכו כל מחוון הADI*/
+.ADI-display {
+  width: 250px;             /* same width & height */
+  height: 250px;
+  border-radius: 50%;/*שיהיה עיגול*/
+  border: 6px solid rgb(5, 51, 66);  ;
+  overflow: hidden;         /* crop anything outside the circle */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(5, 51, 66);
+  margin-top: 40px;
+  left: -50px;
+
+}
+/**/
+/*מחוון ADI הצבעים ישתנו בהתאם לערך*/
+.ADI-circle {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(to top, rgb(7, 110, 7) 50%,
+    rgb(45, 116, 198) 50%);
+}
+
+
+.top-buttons {
+  background-color: #e0e0e0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+.top-buttons button {
+  background-color: #bbb;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.top-buttons button:hover {
+  background-color: #999;
+}
+
+
+
+.input-form {
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 30px 40px;
+  width: 500px;
+  margin: 30px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.input-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-row label {
+  width: 100px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+.form-row input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  font-size: 16px;
+}
+
+.input-form button {
+  margin-top: 10px;
+  padding: 12px 40px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.input-form button:hover {
+  background-color: #555;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3); /* רקע שקוף */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+
+.tab {
+  background-color: #ccc;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tab:hover {
+  background-color: #bbb;
+}
+
+.tab.active {
+  background-color: #444;
+  color: white;
+}
+
+.text-display {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+
+.circle {
+  width: 120px;
+  height: 120px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.value {
+  font-size: 20px;
+  color: #333;
+}
+
+
+/*הודעת שגיאה ולידציה של קלט*/
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+/*הודעת שגיאה */
+.error-message {
+  color: #b00020; 
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+  background-color: #fddede;
+  width: 100%;
+  box-sizing: border-box;
+}
